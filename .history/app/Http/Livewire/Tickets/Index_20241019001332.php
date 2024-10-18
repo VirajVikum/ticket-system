@@ -31,7 +31,7 @@ class Index extends Component
         $this->overDue = Ticket::where('status', 2)->get();
         $this->closed = Ticket::where('status', 3)->get();
 
-
+        
         $this->newCount = $newTickets = $this->new->count();
         $this->openCount = $openTickets = $this->open->count();
         $this->overDueCount = $overDueTickets = $this->overDue->count();
@@ -40,14 +40,14 @@ class Index extends Component
 
         // $totalTickets = Ticket::count();
 
-
+     
         // if ($totalTickets > 0) {
         //     $this->newPrcntg = number_format(($newTickets / $totalTickets) * 100, 2);
         //     $this->openPrcntg = number_format(($openTickets / $totalTickets) * 100, 2);
         //     $this->overDuePrcntg = number_format(($overDueTickets / $totalTickets) * 100, 2);
         //     $this->closedPrcntg = number_format(($closedTickets / $totalTickets) * 100, 2);
         // } else {
-
+            
         //     $this->newPrcntg = 0;
         //     $this->openPrcntg = 0;
         //     $this->overDuePrcntg = 0;
@@ -62,23 +62,23 @@ class Index extends Component
         $this->overDue = Ticket::where('status', 2)->get();
         $this->closed = Ticket::where('status', 3)->get();
 
+        
+        $this->newCount = $newTickets = Ticket::where('status', 0)->count();
+        $this->openCount = $openTickets = Ticket::where('status', 1)->count();
+        $this->overDueCount = $overDueTickets = Ticket::where('status', 2)->count();
+        $this->closedCount = $closedTickets = Ticket::where('status', 3)->count();
 
-        $this->newCount = $newTickets = $this->new->count();
-        $this->openCount = $openTickets = $this->open->count();
-        $this->overDueCount = $overDueTickets = $this->overDue->count();
-        $this->closedCount = $closedTickets = $this->closed->count();
-
-
+       
         // $totalTickets = Ticket::count();
 
-
+       
         // if ($totalTickets > 0) {
         //     $this->newPrcntg = number_format(($newTickets / $totalTickets) * 100, 2);
         //     $this->openPrcntg = number_format(($openTickets / $totalTickets) * 100, 2);
         //     $this->overDuePrcntg = number_format(($overDueTickets / $totalTickets) * 100, 2);
         //     $this->closedPrcntg = number_format(($closedTickets / $totalTickets) * 100, 2);
         // } else {
-
+            
         //     $this->newPrcntg = 0;
         //     $this->openPrcntg = 0;
         //     $this->overDuePrcntg = 0;
@@ -86,8 +86,8 @@ class Index extends Component
         // }
 
         // dd($this->newPrcntg);
-
-
+        
+        
     }
 
     public function render()
@@ -95,7 +95,7 @@ class Index extends Component
         if ($this->searchItem) {
             $this->new = Ticket::where('status', 0)
                 ->where(function ($query) {
-                    $query->where('title1', 'like', '%' . $this->searchItem . '%')
+                    $query->where('title1', 'like', '%' . $this->searchItem . '%') // Changed to $searchItem
                         ->orWhere('title2', 'like', '%' . $this->searchItem . '%')
                         ->orWhere('content', 'like', '%' . $this->searchItem . '%')
                         ->orWhere('contact', 'like', '%' . $this->searchItem . '%');
@@ -124,11 +124,12 @@ class Index extends Component
                         ->orWhere('content', 'like', '%' . $this->searchItem . '%')
                         ->orWhere('contact', 'like', '%' . $this->searchItem . '%');
                 })->get();
+        
+                $this->newCount = $this->new->count();
+        $this->openCount = $this->open->count();
+        $this->overDueCount = $this->overDue->count();
+        $this->closedCount = $this->closed->count();
 
-            $this->newCount = $this->new->count();
-            $this->openCount = $this->open->count();
-            $this->overDueCount = $this->overDue->count();
-            $this->closedCount = $this->closed->count();
         }
 
         return view('livewire.tickets.index');

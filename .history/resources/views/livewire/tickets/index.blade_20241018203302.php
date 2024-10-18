@@ -1,5 +1,6 @@
 <div class="h-screen">
-    <form class="flex items-center max-w-sm mx-auto pt-4">   
+<div class="h-full">
+    <form class="flex items-center max-w-sm mx-auto">   
         <label for="simple-search" class="sr-only">Search</label>
         <div class="relative w-full">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -7,7 +8,7 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
                 </svg>
             </div>
-            <input type="text" wire:model="searchItem" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search here..." required />
+            <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search branch name..." required />
         </div>
         <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -18,7 +19,7 @@
     </form>
 
 
-<div wire:poll="refreshComponent" class="flex justify-center p-8 h-5/6">
+<div wire:poll="refreshComponent" class="flex justify-center p-8 h-full">
 
     <div class="flex space-x-6 w-full max-w-7xl h-full">
 
@@ -66,7 +67,7 @@
                                             d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    <p class="pl-1"> {{ $nw->contact }}</p>
+                                    <p class="pl-1"> 768209644</p>
                                 </div>
                             </div>
                             <div
@@ -102,7 +103,7 @@
                 @endforeach
 
             </div>
-            <button class="text-blue-500 mt-2">+ Add another card</button>
+            <button class="text-blue-500 mt-4">+ Add another card</button>
         </div>
 
         <!-- Column 2: In Progress -->
@@ -153,7 +154,7 @@
                                             d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    <p class="pl-1"> {{ $nw->contact }}</p>
+                                    <p class="pl-1"> 768209644</p>
                                 </div>
                             </div>
                             <div
@@ -192,7 +193,7 @@
                 <!-- Add another card -->
                 
             </div>
-            <button class=" text-blue-500 mt-2">+ Add another card</button>
+            <button class=" text-blue-500 mt-4">+ Add another card</button>
         </div>
 
         <!-- Column 3: Done -->
@@ -243,7 +244,7 @@
                                             d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    <p class="pl-1"> {{ $nw->contact }}</p>
+                                    <p class="pl-1"> 768209644</p>
                                 </div>
                             </div>
                             <div
@@ -282,7 +283,7 @@
                 <!-- Add another card -->
                 
             </div>
-            <button class="text-blue-500 mt-2">+ Add another card</button>
+            <button class="text-blue-500 mt-4">+ Add another card</button>
         </div>
         <!-- Column 4: Done -->
         <div class="w-1/4 bg-white shadow-md rounded-lg p-4">
@@ -332,7 +333,7 @@
                                             d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    <p class="pl-1"> {{ $nw->contact }}</p>
+                                    <p class="pl-1"> 768209644</p>
                                 </div>
                             </div>
                             <div
@@ -370,9 +371,9 @@
                 <!-- Add another card -->
                 
             </div>
-            <button class="text-blue-500 mt-2">+ Add another card</button>
+            <button class="text-blue-500 mt-4">+ Add another card</button>
         </div>
     </div>
 </div>
-
+</div>
 </div>

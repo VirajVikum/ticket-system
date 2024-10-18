@@ -18,7 +18,7 @@
     </form>
 
 
-<div wire:poll="refreshComponent" class="flex justify-center p-8 h-5/6">
+<div  class="flex justify-center p-8 h-5/6">
 
     <div class="flex space-x-6 w-full max-w-7xl h-full">
 
