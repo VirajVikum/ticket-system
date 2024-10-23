@@ -1,3 +1,4 @@
+<div>
 <div wire:poll="refreshComponent" class="flex flex-col items-center">
     <div class="relative text-center">
         <!-- The progress bar container -->
@@ -26,3 +27,4 @@
     box-sizing: border-box;
 }
 </style>
+</div>

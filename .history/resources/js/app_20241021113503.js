@@ -1,9 +1,12 @@
 import './bootstrap';
 
+// In resources/js/app.js or wherever Alpine is initialized
 import Alpine from 'alpinejs';
 import focus from '@alpinejs/focus';
 
-Alpine.plugin(focus); // Register the focus plugin
+// Initialize the Focus plugin
+Alpine.plugin(focus);
 
+// Start Alpine.js
 window.Alpine = Alpine;
 Alpine.start();

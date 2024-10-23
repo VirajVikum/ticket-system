@@ -27,9 +27,9 @@ class Index extends Component
 
     public $updated =false;
 
-    public $tickets;
-
     protected $listeners = ['updated' => 'changeStatus','search' => 'searchItems'];
+
+    public $tickets;
 
     public function mount()
     {
@@ -37,7 +37,7 @@ class Index extends Component
             return Ticket::all();
         });
 
-        // changed Ticket:: to $this->tickets->  & removed ->get()
+        // Ticket:: replaced with $this->tickets-> and removed ->get()
 
         $this->new = $this->tickets->where('status', 0);
         $this->open = $this->tickets->where('status', 1);
@@ -78,11 +78,6 @@ class Index extends Component
     {
         if($this->updated)
         {
-            Cache::forget('tickets_table');
-
-            $this->tickets = Cache::remember('tickets_table', 60, function () {
-                return Ticket::all();
-            });
 
         $this->new = $this->tickets->where('status', 0);
         $this->open = $this->tickets->where('status', 1);
@@ -124,36 +119,36 @@ class Index extends Component
     {
         if ($this->searchItem) {
             $this->new = $this->tickets->where('status', 0)
-            ->filter(function ($ticket) {
-                return str_contains($ticket['title1'], $this->searchItem)
-                    || str_contains($ticket['title2'], $this->searchItem)
-                    || str_contains($ticket['content'], $this->searchItem)
-                    || str_contains($ticket['contact'], $this->searchItem);
-            });
+                ->where(function ($query) {
+                    $query->where('title1', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('title2', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('content', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('contact', 'like', '%' . $this->searchItem . '%');
+                });
 
             $this->open = $this->tickets->where('status', 1)
-            ->filter(function ($ticket) {
-                return str_contains($ticket['title1'], $this->searchItem)
-                    || str_contains($ticket['title2'], $this->searchItem)
-                    || str_contains($ticket['content'], $this->searchItem)
-                    || str_contains($ticket['contact'], $this->searchItem);
-            });
+                ->where(function ($query) {
+                    $query->where('title1', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('title2', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('content', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('contact', 'like', '%' . $this->searchItem . '%');
+                });
 
             $this->overDue = $this->tickets->where('status', 2)
-            ->filter(function ($ticket) {
-                return str_contains($ticket['title1'], $this->searchItem)
-                    || str_contains($ticket['title2'], $this->searchItem)
-                    || str_contains($ticket['content'], $this->searchItem)
-                    || str_contains($ticket['contact'], $this->searchItem);
-            });
+                ->where(function ($query) {
+                    $query->where('title1', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('title2', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('content', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('contact', 'like', '%' . $this->searchItem . '%');
+                });
 
             $this->closed = $this->tickets->where('status', 3)
-            ->filter(function ($ticket) {
-                return str_contains($ticket['title1'], $this->searchItem)
-                    || str_contains($ticket['title2'], $this->searchItem)
-                    || str_contains($ticket['content'], $this->searchItem)
-                    || str_contains($ticket['contact'], $this->searchItem);
-            });
+                ->where(function ($query) {
+                    $query->where('title1', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('title2', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('content', 'like', '%' . $this->searchItem . '%')
+                        ->orWhere('contact', 'like', '%' . $this->searchItem . '%');
+                });
 
             $this->newCount = $this->new->count();
             $this->openCount = $this->open->count();
