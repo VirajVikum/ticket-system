@@ -22,8 +22,7 @@ class MoreDetails extends ModalComponent
             $ticket->save();
         }
         $this->closeModal();
-        return redirect(request()->header('Referer'));
-
+        $this->dispatchBrowserEvent('refreshPage'); 
     }
 
 

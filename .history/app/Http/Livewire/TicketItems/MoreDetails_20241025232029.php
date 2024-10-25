@@ -22,8 +22,7 @@ class MoreDetails extends ModalComponent
             $ticket->save();
         }
         $this->closeModal();
-        return redirect(request()->header('Referer'));
-
+        return view('livewire.ticket-items.more-details'); 
     }
 
 

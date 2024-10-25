@@ -18,12 +18,10 @@ class MoreDetails extends ModalComponent
     {
         $ticket = TicketItem::find($id);
         if ($ticket) {
-            $ticket->ticket_status_id = 2; // Replace 'new_status' with the desired status value
+            $ticket->status = 2; // Replace 'new_status' with the desired status value
             $ticket->save();
         }
         $this->closeModal();
-        return redirect(request()->header('Referer'));
-
     }
 
 
