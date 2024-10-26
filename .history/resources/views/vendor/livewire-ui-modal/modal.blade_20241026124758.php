@@ -40,7 +40,7 @@
                 x-transition:leave="ease-in duration-200"
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                class="w-full h-full bg-gray-400 bg-opacity-50  rounded-lg overflow-hidden shadow-xl transform transition-all p-4" 
+                class="w-full h-full bg-gray-400 opacity-75 rounded-lg overflow-hidden shadow-xl transform transition-all p-4" 
                 {{-- <!-- Updated: `w-screen` and `h-screen` for full width and height, `p-4` for padding --> --}}
                 id="modal-container"
                 x-trap.noscroll.inert="show && showActiveComponent"

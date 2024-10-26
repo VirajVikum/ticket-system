@@ -77,9 +77,9 @@ class TicketItemTable extends DataTableComponent
         $this->emit('openMoreDetailsModal', $id);
     }
 
-    public function getTableRowUrl($row): string
+    public function getTableRowUrl($id)
     {
-        $this->emit('openMoreDetailsModal', $row);
+        $this->emit('openMoreDetailsModal', $id);
     }
 
 }

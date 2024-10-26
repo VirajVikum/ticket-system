@@ -1,4 +1,4 @@
-<div class="justify-center p-12">
+<div class="justify-center p-12 pt-0">
     <div class="p-6 bg-white rounded-lg shadow-md space-y-6 text-left"> 
         <h2 class="text-lg font-semibold pl-0">{{$ticketItem->topic}}</h2>
     
