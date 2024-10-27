@@ -6,6 +6,7 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\TicketItem;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Filter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class TicketItemTable extends DataTableComponent
@@ -15,38 +16,36 @@ class TicketItemTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id')
-            ->setSearchEnabled();
+            ->setSearchEnabled();;
     }
+
+    public array $sortNames = [
+        'ticket_status_id' => 'Status',
+    ];
+ 
+    public array $filterNames = [
+        'status' => 'Ticket Status',
+    ];
+ 
 
     public function filters(): array
     {
         return [
-            SelectFilter::make('Ticket Status')
+            SelectFilter::make('Status')
                 ->options([
-                    '' => 'Any', // Default option
-                    1 => 'New',
-                    2 => 'Open',
-                    3 => 'Expired',
-                    4 => 'Closed',
-                ])
-                ->filter(function (Builder $builder, $value) {
-                    // Apply the filter to the query
-                    if ($value) {
-                        $builder->where('ticket_status_id', $value);
-                    }
-                }),
+                    '' => 'Any',          // Default option to show all
+                    1 => 'Open',
+                    2 => 'Closed',
+                    3 => 'New',
+                    4 => 'Expired',      // Add other statuses as needed
+                ]),
         ];
     }
-
-    // public function query(): Builder
-    // {
-    //     return TicketItem::query(); // Base query without any filters applied
-    // }
 
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")->sortable()->searchable(),
+            Column::make("Id", "id")->sortable()->searchable()->searchable(),
             Column::make("Topic", "topic")->sortable()->searchable(),
             Column::make("Description", "description")->sortable()->searchable(),
             Column::make("Lead id", "lead_id")->sortable()->searchable(),
@@ -65,7 +64,7 @@ class TicketItemTable extends DataTableComponent
             Column::make("Created at", "created_at")->sortable()->searchable(),
             Column::make("Updated at", "updated_at")->sortable()->searchable(),
             Column::make("Deleted at", "deleted_at")->sortable()->searchable(),
-            Column::make("View")
+            Column::make("Actions")
                 ->label(function ($row) {
                     return view('livewire.ticket-items.index', ['ticketItemId' => $row->id]);
                 })
@@ -81,15 +80,16 @@ class TicketItemTable extends DataTableComponent
     // Method to set row class based on ticket_status_id
     public function rowClass($row): ?string
     {
+        // Define conditional classes based on ticket_status_id
         switch ($row->ticket_status_id) {
             case 1:
-                return 'bg-red-600';
+                return 'bg-red-600'; // Example color for status 1
             case 2:
-                return 'bg-yellow-100';
+                return 'bg-yellow-100'; // Example color for status 2
             case 3:
-                return 'bg-green-100';
+                return 'bg-green-100'; // Example color for status 3
             default:
-                return 'bg-black';
+                return 'bg-black'; // Default color
         }
     }
 
@@ -102,4 +102,27 @@ class TicketItemTable extends DataTableComponent
     {
         $this->emit('openMoreDetailsModal', $id);
     }
+
+    
+
+
+
+
+
+
+
+    
+
+    public function query(): Builder
+{
+    $query = TicketItem::query();
+
+    if ($status = $this->getFilter('status')) {
+        $query->where('ticket_status_id', $status);
+    }
+
+    return $query;
+}
+
+
 }

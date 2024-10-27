@@ -1,6 +1,6 @@
 <div
     class=" @if ($ticketStatusId == 1) bg-green-300 @elseif($ticketStatusId == 2) bg-red-300 @elseif($ticketStatusId == 3) bg-gray-300 @else bg-yellow-200 @endif
-     py-2 px-12 rounded-full flex items-center justify-center" wire:poll.1500ms>
+     py-2 px-12 rounded-full items-center" wire:poll.1500ms>
     <label class="">
         @if ($ticketStatusId == 1)
             New

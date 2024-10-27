@@ -24,10 +24,10 @@ class TicketItemTable extends DataTableComponent
             SelectFilter::make('Ticket Status')
                 ->options([
                     '' => 'Any', // Default option
-                    1 => 'New',
-                    2 => 'Open',
-                    3 => 'Expired',
-                    4 => 'Closed',
+                    1 => 'Open',
+                    2 => 'Closed',
+                    3 => 'New',
+                    4 => 'Expired',
                 ])
                 ->filter(function (Builder $builder, $value) {
                     // Apply the filter to the query
@@ -38,10 +38,10 @@ class TicketItemTable extends DataTableComponent
         ];
     }
 
-    // public function query(): Builder
-    // {
-    //     return TicketItem::query(); // Base query without any filters applied
-    // }
+    public function query(): Builder
+    {
+        return TicketItem::query(); // Base query without any filters applied
+    }
 
     public function columns(): array
     {
@@ -65,7 +65,7 @@ class TicketItemTable extends DataTableComponent
             Column::make("Created at", "created_at")->sortable()->searchable(),
             Column::make("Updated at", "updated_at")->sortable()->searchable(),
             Column::make("Deleted at", "deleted_at")->sortable()->searchable(),
-            Column::make("View")
+            Column::make("Actions")
                 ->label(function ($row) {
                     return view('livewire.ticket-items.index', ['ticketItemId' => $row->id]);
                 })

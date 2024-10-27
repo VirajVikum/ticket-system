@@ -21,27 +21,28 @@ class TicketItemTable extends DataTableComponent
     public function filters(): array
     {
         return [
-            SelectFilter::make('Ticket Status')
-                ->options([
-                    '' => 'Any', // Default option
-                    1 => 'New',
-                    2 => 'Open',
-                    3 => 'Expired',
-                    4 => 'Closed',
-                ])
-                ->filter(function (Builder $builder, $value) {
-                    // Apply the filter to the query
-                    if ($value) {
-                        $builder->where('ticket_status_id', $value);
-                    }
-                }),
+            SelectFilter::make('Ticket Status') // Create a SelectFilter
+                ->options([ // Define the options for the dropdown
+                    '' => 'Any', // Default option to show all
+                    1 => 'Open',
+                    2 => 'Closed',
+                    3 => 'New',
+                    4 => 'Expired', // Add other statuses as needed
+                ]),
         ];
     }
 
-    // public function query(): Builder
-    // {
-    //     return TicketItem::query(); // Base query without any filters applied
-    // }
+    public function query(): Builder
+    {
+        $query = TicketItem::query();
+
+        // Apply the selected status filter
+        if ($status = $this->getFilter('ticket_status_id')) {
+            $query->where('ticket_status_id', $status);
+        }
+
+        return $query;
+    }
 
     public function columns(): array
     {
@@ -65,7 +66,7 @@ class TicketItemTable extends DataTableComponent
             Column::make("Created at", "created_at")->sortable()->searchable(),
             Column::make("Updated at", "updated_at")->sortable()->searchable(),
             Column::make("Deleted at", "deleted_at")->sortable()->searchable(),
-            Column::make("View")
+            Column::make("Actions")
                 ->label(function ($row) {
                     return view('livewire.ticket-items.index', ['ticketItemId' => $row->id]);
                 })

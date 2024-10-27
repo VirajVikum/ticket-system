@@ -38,10 +38,10 @@ class TicketItemTable extends DataTableComponent
         ];
     }
 
-    // public function query(): Builder
-    // {
-    //     return TicketItem::query(); // Base query without any filters applied
-    // }
+    public function query(): Builder
+    {
+        return TicketItem::query(); // Base query without any filters applied
+    }
 
     public function columns(): array
     {
@@ -65,7 +65,7 @@ class TicketItemTable extends DataTableComponent
             Column::make("Created at", "created_at")->sortable()->searchable(),
             Column::make("Updated at", "updated_at")->sortable()->searchable(),
             Column::make("Deleted at", "deleted_at")->sortable()->searchable(),
-            Column::make("View")
+            Column::make("Actions")
                 ->label(function ($row) {
                     return view('livewire.ticket-items.index', ['ticketItemId' => $row->id]);
                 })
