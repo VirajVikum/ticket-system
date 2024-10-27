@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    @livewire('ticket-items.count-panel')
+                    abcd
 
                     @livewire('ticket-item-table')
 
