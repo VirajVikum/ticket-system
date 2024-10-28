@@ -28,7 +28,6 @@ class TicketItemTable extends DataTableComponent
                     2 => 'Open',
                     3 => 'Overdue',
                     4 => 'Closed',
-                    5 => 'Canceled',
                 ])
                 ->filter(function (Builder $builder, $value) {
                     // Apply the filter to the query
@@ -80,19 +79,19 @@ class TicketItemTable extends DataTableComponent
     }
 
     // Method to set row class based on ticket_status_id
-    // public function rowClass($row): ?string
-    // {
-    //     switch ($row->ticket_status_id) {
-    //         case 1:
-    //             return 'bg-red-600';
-    //         case 2:
-    //             return 'bg-yellow-100';
-    //         case 3:
-    //             return 'bg-green-100';
-    //         default:
-    //             return 'bg-black';
-    //     }
-    // }
+    public function rowClass($row): ?string
+    {
+        switch ($row->ticket_status_id) {
+            case 1:
+                return 'bg-red-600';
+            case 2:
+                return 'bg-yellow-100';
+            case 3:
+                return 'bg-green-100';
+            default:
+                return 'bg-black';
+        }
+    }
 
     public function delete($id)
     {

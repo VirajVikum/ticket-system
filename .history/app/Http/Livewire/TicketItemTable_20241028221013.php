@@ -15,7 +15,8 @@ class TicketItemTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id')
-            ->setSearchEnabled();
+            ->setSearchEnabled()
+            ->setColumnSearchEnabl();
     }
 
     public function filters(): array

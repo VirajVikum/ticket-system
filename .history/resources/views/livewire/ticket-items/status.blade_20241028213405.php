@@ -5,7 +5,7 @@
            @else bg-yellow-700 hover:bg-yellow-800 @endif 
            py-2 px-12 rounded-full flex items-center justify-center transition-colors duration-200"
     wire:poll.1500ms>
-    <label class="text-black text-bold">
+    <label class="">
         @if ($ticketStatusId == 1)
             New
         @elseif($ticketStatusId == 2)
