@@ -15,11 +15,6 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->text('title1');
-            $table->text('title2')->nullable();
-            $table->text('content')->nullable();
-            $table->text('contact')->nullable();
-            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }
