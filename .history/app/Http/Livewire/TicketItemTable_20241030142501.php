@@ -246,7 +246,7 @@ class TicketItemTable extends DataTableComponent
             ->when($this->columnSearch['call_id'] ?? null, fn($query, $call_id) => $query->where('tickets.call_id', 'like', '%' . $call_id . '%'))
             ->when($this->columnSearch['contact_number'] ?? null, fn($query, $contact_number) => $query->where('leads.contact_number', 'like', '%' . $contact_number . '%'))
 
-            ->when($this->columnSearch['title'] ?? null, fn($query, $title) => $query->where('ticket_statuses.title', 'like', '%' . $title . '%'))
+            ->when($this->columnSearch['title'] ?? null, fn($query, $title) => $query->where('tickets.ticket_status_id', 'like', '%' . $title . '%'))
             ->select('tickets.*');
     }
 

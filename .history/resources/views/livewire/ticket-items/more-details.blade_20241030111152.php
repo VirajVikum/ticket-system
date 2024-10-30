@@ -29,14 +29,12 @@
 
             @foreach ($commentedAgents as $commentedAgent )            
             <div class="text-gray-500 text-sm">
-                <span class="font-semibold">{{$commentedAgent->comment}} Commented on ticket by {{$commentedAgent->user->name}}</span>
+                <span class="font-semibold">{{$commentedAgent->comment}} Commented on ticket by {{$commentedAgent->user_id}}</span>
             </div>
             @endforeach
 
             <div class="text-gray-500 text-sm">
-                @foreach ($createdAgent as $createdAgent)
-                <span class="font-semibold">Ticket created by {{ $createdAgent->user->name}} </span>
-                @endforeach
+                <span class="font-semibold">Ticket created by </span>
             </div>
             
         </div>
@@ -45,7 +43,7 @@
             <button class="text-red-500 font-semibold hover:text-red-600">Complete</button>
             <div>
                 <button type="button" wire:click="changeStatus({{ $ticketItem->id }})" class="text-green-600 hover:text-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Start</button>
-                <button wire:click="$emit('closeModal')" class="text-gray-500 font-semibold hover:text-gray-600">Exit</button>
+                <button class="text-gray-500 font-semibold hover:text-gray-600">Exit</button>
             </div>
         </div>
     </div>

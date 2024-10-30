@@ -38,13 +38,8 @@ class Ticket extends Model
         'synced_at' => 'datetime',
     ];
 
-    public function lead()
+    public function ticket()
     {
         return $this->belongsTo(Lead::class);
-    }
-
-    public function ticketStatus()
-    {
-        return $this->belongsTo(TicketStatus::class);
     }
 }

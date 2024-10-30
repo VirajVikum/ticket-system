@@ -43,7 +43,7 @@ class Ticket extends Model
         return $this->belongsTo(Lead::class);
     }
 
-    public function ticketStatus()
+    public function status()
     {
         return $this->belongsTo(TicketStatus::class);
     }

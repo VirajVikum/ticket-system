@@ -161,7 +161,7 @@ class TicketItemTable extends DataTableComponent
                     return '<div class="text-center">' . e($value) . '</div>';
                 })
                 ->html(),
-            Column::make("Ticket status id", "ticketStatus.title")->sortable()->searchable()
+            Column::make("Ticket status id", "ticket_status_id")->sortable()->searchable()
                 ->format(function ($value) {
                     return '<div class="text-center">' . e($value) . '</div>';
                 })
@@ -215,8 +215,10 @@ class TicketItemTable extends DataTableComponent
                 })
                 ->html(),
 
-            Column::make("Status")
-                
+            Column::make("Status", "ticketStatus.title")
+                // ->label(function ($row) {
+                //     return view('livewire.ticket-items.status', ['ticketStatusId' => $row->ticket_status_id]);
+                // })
                 ->format(function ($value) {
                     return '<div class="text-center">' . e($value) . '</div>';
                 })
@@ -229,11 +231,22 @@ class TicketItemTable extends DataTableComponent
                     return '<strong>Name Footer</strong>';
                 })
 
-                ->label(function ($row) {
-                    return view('livewire.ticket-items.status', ['ticketStatusId' => $row->ticket_status_id]);
-                })
                 ->html(),
 
+            Column::make("Contact", "lead.contact_number")
+                ->format(function ($value) {
+                    return '<div class="text-center">' . e($value) . '</div>';
+                })
+
+
+                ->secondaryHeader(function () {
+                    return view('livewire.ticket-items.tables.cells.input-search', ['field' => 'contact_number', 'columnSearch' => $this->columnSearch]);
+                })
+                ->footer(function ($rows) {
+                    return '<strong>Name Footer</strong>';
+                })
+
+                ->html(),
         ];
     }
 

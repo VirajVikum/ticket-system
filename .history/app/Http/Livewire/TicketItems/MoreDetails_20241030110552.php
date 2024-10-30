@@ -11,8 +11,7 @@ class MoreDetails extends ModalComponent
 {
     public $ticketId;
     public $ticketItem;
-    public $commentedAgents;
-    public $createdAgent;
+    public $activities;
     public $comment;
 
     protected $listeners = ['commented' => 'addComment'];
@@ -25,8 +24,7 @@ class MoreDetails extends ModalComponent
     {
         $this->ticketId=$ticketItemId;
         $this->ticketItem = Ticket::find($ticketItemId);
-        $this->commentedAgents=TicketActivity::all()->where('ticket_id', $ticketItemId)->where('type','Commented');
-        $this->createdAgent=TicketActivity::where('ticket_id', $ticketItemId)->where('type','Created')->get();
+        $this->activities=TicketActivity::all()->where('ticket_id', $ticketItemId);
     }
 
     public function changeStatus($id)
@@ -51,8 +49,6 @@ class MoreDetails extends ModalComponent
             'user_id'=>Auth::id(),
         ]);
         $this->comment='';
-        $this->commentedAgents=TicketActivity::all()->where('ticket_id', $this->ticketId)->where('type','Commented');
-        $this->createdAgent=TicketActivity::where('ticket_id', $this->ticketId)->where('type','Created')->get();
     }
 
 

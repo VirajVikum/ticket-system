@@ -161,7 +161,7 @@ class TicketItemTable extends DataTableComponent
                     return '<div class="text-center">' . e($value) . '</div>';
                 })
                 ->html(),
-            Column::make("Ticket status id", "ticketStatus.title")->sortable()->searchable()
+            Column::make("Ticket status id", "ticket_status_id")->sortable()->searchable()
                 ->format(function ($value) {
                     return '<div class="text-center">' . e($value) . '</div>';
                 })
@@ -215,7 +215,7 @@ class TicketItemTable extends DataTableComponent
                 })
                 ->html(),
 
-            Column::make("Status")
+            Column::make("Status", "ticketStatus.title")
                 
                 ->format(function ($value) {
                     return '<div class="text-center">' . e($value) . '</div>';

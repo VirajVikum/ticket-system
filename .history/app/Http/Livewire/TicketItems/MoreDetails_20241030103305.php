@@ -4,15 +4,12 @@ namespace App\Http\Livewire\TicketItems;
 
 use App\Models\Ticket;
 use App\Models\TicketActivity;
-use Illuminate\Support\Facades\Auth;
 use LivewireUI\Modal\ModalComponent;
 
 class MoreDetails extends ModalComponent
 {
     public $ticketId;
     public $ticketItem;
-    public $commentedAgents;
-    public $createdAgent;
     public $comment;
 
     protected $listeners = ['commented' => 'addComment'];
@@ -25,8 +22,6 @@ class MoreDetails extends ModalComponent
     {
         $this->ticketId=$ticketItemId;
         $this->ticketItem = Ticket::find($ticketItemId);
-        $this->commentedAgents=TicketActivity::all()->where('ticket_id', $ticketItemId)->where('type','Commented');
-        $this->createdAgent=TicketActivity::where('ticket_id', $ticketItemId)->where('type','Created')->get();
     }
 
     public function changeStatus($id)
@@ -45,14 +40,8 @@ class MoreDetails extends ModalComponent
     {
         $this->validate();
         TicketActivity::create([
-            'ticket_id'=>$this->ticketId,
-            'type'=>'Commented',
-            'comment'=>$this->comment,
-            'user_id'=>Auth::id(),
+            'ticket_id'=>
         ]);
-        $this->comment='';
-        $this->commentedAgents=TicketActivity::all()->where('ticket_id', $this->ticketId)->where('type','Commented');
-        $this->createdAgent=TicketActivity::where('ticket_id', $this->ticketId)->where('type','Created')->get();
     }
 
 

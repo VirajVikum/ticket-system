@@ -41,10 +41,6 @@ class Ticket extends Model
     public function lead()
     {
         return $this->belongsTo(Lead::class);
-    }
-
-    public function ticketStatus()
-    {
-        return $this->belongsTo(TicketStatus::class);
+        // return $this->belongsTo(Lead::class, 'id', 'lead_id');
     }
 }

@@ -161,7 +161,7 @@ class TicketItemTable extends DataTableComponent
                     return '<div class="text-center">' . e($value) . '</div>';
                 })
                 ->html(),
-            Column::make("Ticket status id", "ticketStatus.title")->sortable()->searchable()
+            Column::make("Ticket status id", "ticket_status_id")->sortable()->searchable()
                 ->format(function ($value) {
                     return '<div class="text-center">' . e($value) . '</div>';
                 })
@@ -215,7 +215,7 @@ class TicketItemTable extends DataTableComponent
                 })
                 ->html(),
 
-            Column::make("Status")
+            Column::make("Status", "ticketStatus.title")
                 
                 ->format(function ($value) {
                     return '<div class="text-center">' . e($value) . '</div>';
@@ -234,20 +234,35 @@ class TicketItemTable extends DataTableComponent
                 })
                 ->html(),
 
+            Column::make("Contact", "lead.contact_number")
+                ->format(function ($value) {
+                    return '<div class="text-center">' . e($value) . '</div>';
+                })
+
+
+                ->secondaryHeader(function () {
+                    return view('livewire.ticket-items.tables.cells.input-search', ['field' => 'contact_number', 'columnSearch' => $this->columnSearch]);
+                })
+                ->footer(function ($rows) {
+                    return '<strong>Name Footer</strong>';
+                })
+
+                ->html(),
         ];
     }
 
     public function builder(): EloquentBuilder
     {
         return Ticket::query()
-            ->when($this->columnSearch['id'] ?? null, fn($query, $name) => $query->where('tickets.id', 'like', '%' . $name . '%'))
-            ->when($this->columnSearch['topic'] ?? null, fn($query, $topic) => $query->where('tickets.topic', 'like', '%' . $topic . '%'))
-            ->when($this->columnSearch['bill_no'] ?? null, fn($query, $bill_no) => $query->where('tickets.bill_no', 'like', '%' . $bill_no . '%'))
-            ->when($this->columnSearch['call_id'] ?? null, fn($query, $call_id) => $query->where('tickets.call_id', 'like', '%' . $call_id . '%'))
-            ->when($this->columnSearch['contact_number'] ?? null, fn($query, $contact_number) => $query->where('leads.contact_number', 'like', '%' . $contact_number . '%'))
-
-            ->when($this->columnSearch['title'] ?? null, fn($query, $title) => $query->where('ticket_statuses.title', 'like', '%' . $title . '%'))
-            ->select('tickets.*');
+        
+        ->when($this->columnSearch['id'] ?? null, fn($query, $id) => $query->where('tickets.id', 'like', '%' . $id . '%'))
+        ->when($this->columnSearch['topic'] ?? null, fn($query, $topic) => $query->where('tickets.topic', 'like', '%' . $topic . '%'))
+        ->when($this->columnSearch['bill_no'] ?? null, fn($query, $bill_no) => $query->where('tickets.bill_no', 'like', '%' . $bill_no . '%'))
+        ->when($this->columnSearch['call_id'] ?? null, fn($query, $call_id) => $query->where('tickets.call_id', 'like', '%' . $call_id . '%'))
+        ->when($this->columnSearch['contact_number'] ?? null, fn($query, $contact_number) => $query->where('leads.contact_number', 'like', '%' . $contact_number . '%'))
+        // ->join('ticket_statuses', 'tickets.ticket_status_id', '=', 'ticket_statuses.id') // Join with ticket_statuses
+        ->when($this->columnSearch['title'] ?? null, fn($query, $title) => $query->where('ticket_statuses.title', 'like', '%' . $title . '%'))
+        ->select('tickets.*', 'ticket_statuses.title as ticket_status_title');
     }
 
 

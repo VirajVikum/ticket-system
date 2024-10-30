@@ -1,4 +1,4 @@
-<div class="justify-center p-12">
+<div class="justify-center p-12"  wire:poll.1500>
     <div class="p-6 bg-white rounded-lg shadow-md space-y-6 text-left"> 
         <h2 class="text-lg font-semibold pl-0">{{$ticketItem->topic}}</h2>
     
@@ -45,7 +45,7 @@
             <button class="text-red-500 font-semibold hover:text-red-600">Complete</button>
             <div>
                 <button type="button" wire:click="changeStatus({{ $ticketItem->id }})" class="text-green-600 hover:text-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Start</button>
-                <button wire:click="$emit('closeModal')" class="text-gray-500 font-semibold hover:text-gray-600">Exit</button>
+                <button class="text-gray-500 font-semibold hover:text-gray-600">Exit</button>
             </div>
         </div>
     </div>
