@@ -36,7 +36,7 @@
 
             <div class="text-gray-500 text-sm">
                 @foreach ($createdAgent as $createdAgent)
-                <span class="font-semibold">Ticket created by </span> {{ $createdAgent->user->name}}
+                <span class="font-semibold">Ticket created by <span class=" ">{{ $createdAgent->user->name}}</span> </span>
                 @endforeach
             </div>
             

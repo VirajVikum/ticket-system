@@ -209,11 +209,11 @@ class TicketItemTable extends DataTableComponent
                     return '<div class="text-center">' . e($value) . '</div>';
                 })
                 ->html(),
-            // Column::make("View")
-            //     ->label(function ($row) {
-            //         return view('livewire.ticket-items.index', ['ticketItemId' => $row->id]);
-            //     })
-            //     ->html(),
+            Column::make("View")
+                ->label(function ($row) {
+                    return view('livewire.ticket-items.index', ['ticketItemId' => $row->id]);
+                })
+                ->html(),
 
             Column::make("Status")
                 
