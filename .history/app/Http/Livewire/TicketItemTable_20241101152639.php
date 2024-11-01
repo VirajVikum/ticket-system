@@ -216,23 +216,20 @@ class TicketItemTable extends DataTableComponent
             //     ->html(),
 
             Column::make("Status")
-                
-                ->format(function ($value) {
-                    return '<div class="text-center">' . e($value) . '</div>';
-                })
+    ->format(function ($value) {
+        return '<div class="text-center">' . e($value) . '</div>';
+    })
+    ->secondaryHeader(function () {
+        return view('livewire.ticket-items.tables.cells.select-filter'); // Ensure this Blade file contains only the dropdown HTML
+    })
+    ->footer(function ($rows) {
+        return '<strong>Name Footer</strong>';
+    })
+    ->label(function ($row) {
+        return view('livewire.ticket-items.status', ['ticketStatusId' => $row->ticket_status_id, 'ticketItemId' => $row->id]);
+    })
+    ->html(),
 
-                ->secondaryHeader(function () {
-                    return view('livewire.ticket-items.tables.cells.status-filter', ['field' => 'title', 'columnSearch' => $this->columnSearch]);
-                })
-
-                ->footer(function ($rows) {
-                    return '<strong>Name Footer</strong>';
-                })
-
-                ->label(function ($row) {
-                    return view('livewire.ticket-items.status', ['ticketStatusId' => $row->ticket_status_id, 'ticketItemId' => $row->id]);
-                })
-                ->html(),
 
         ];
     }

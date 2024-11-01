@@ -216,23 +216,39 @@ class TicketItemTable extends DataTableComponent
             //     ->html(),
 
             Column::make("Status")
-                
-                ->format(function ($value) {
-                    return '<div class="text-center">' . e($value) . '</div>';
-                })
+    ->format(function ($value) {
+        return '<div class="text-center">' . e($value) . '</div>';
+    })
 
-                ->secondaryHeader(function () {
-                    return view('livewire.ticket-items.tables.cells.status-filter', ['field' => 'title', 'columnSearch' => $this->columnSearch]);
-                })
+    ->secondaryHeader(function () {
+        // Define an array of statuses
+        $statuses = [
+            'Open',      // Status 1
+            'Pending',   // Status 2
+            'Resolved',  // Status 3
+            'Closed',    // Status 4
+            'Archived'   // Status 5
+        ];
 
-                ->footer(function ($rows) {
-                    return '<strong>Name Footer</strong>';
-                })
+        // Pass the statuses array to a custom view for the dropdown
+        return view('livewire.ticket-items.tables.cells.status-dropdown', [
+            'statuses' => $statuses,
+            'field' => 'status', 
+            'columnSearch' => $this->columnSearch
+        ]);
+    })
 
-                ->label(function ($row) {
-                    return view('livewire.ticket-items.status', ['ticketStatusId' => $row->ticket_status_id, 'ticketItemId' => $row->id]);
-                })
-                ->html(),
+    ->footer(function ($rows) {
+        return '<strong>Name Footer</strong>';
+    })
+
+    ->label(function ($row) {
+        return view('livewire.ticket-items.status', [
+            'ticketStatusId' => $row->ticket_status_id, 
+            'ticketItemId' => $row->id
+        ]);
+    })
+    ->html(),
 
         ];
     }

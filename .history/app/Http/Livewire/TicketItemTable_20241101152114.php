@@ -222,7 +222,7 @@ class TicketItemTable extends DataTableComponent
                 })
 
                 ->secondaryHeader(function () {
-                    return view('livewire.ticket-items.tables.cells.status-filter', ['field' => 'title', 'columnSearch' => $this->columnSearch]);
+                    return view('livewire.ticket-items.tables.cells.input-search', ['field' => 'title', 'columnSearch' => $this->columnSearch]);
                 })
 
                 ->footer(function ($rows) {
@@ -232,6 +232,10 @@ class TicketItemTable extends DataTableComponent
                 ->label(function ($row) {
                     return view('livewire.ticket-items.status', ['ticketStatusId' => $row->ticket_status_id, 'ticketItemId' => $row->id]);
                 })
+                ->filter(function (Builder $builder, $value) {
+                    if ($value) {
+                        $builder->where('ticket_status_id', $value);
+                    }})
                 ->html(),
 
         ];

@@ -216,23 +216,39 @@ class TicketItemTable extends DataTableComponent
             //     ->html(),
 
             Column::make("Status")
-                
-                ->format(function ($value) {
-                    return '<div class="text-center">' . e($value) . '</div>';
-                })
+    ->format(function ($value) {
+        return '<div class="text-center">' . e($value) . '</div>';
+    })
 
-                ->secondaryHeader(function () {
-                    return view('livewire.ticket-items.tables.cells.status-filter', ['field' => 'title', 'columnSearch' => $this->columnSearch]);
-                })
+    ->secondaryHeader(function () {
+        $statuses = [
+            '' => 'Any', // Default option
+            1 => 'New',
+            2 => 'Open',
+            3 => 'Overdue',
+            4 => 'Closed',
+            5 => 'Canceled',
+        ];
 
-                ->footer(function ($rows) {
-                    return '<strong>Name Footer</strong>';
-                })
+        return view('livewire.ticket-items.tables.cells.status-filter', [
+            'statuses' => $statuses,
+            'field' => 'status', 
+            'columnSearch' => $this->columnSearch
+        ]);
+    })
 
-                ->label(function ($row) {
-                    return view('livewire.ticket-items.status', ['ticketStatusId' => $row->ticket_status_id, 'ticketItemId' => $row->id]);
-                })
-                ->html(),
+    ->footer(function ($rows) {
+        return '<strong>Name Footer</strong>';
+    })
+
+    ->label(function ($row) {
+        return view('livewire.ticket-items.status', [
+            'ticketStatusId' => $row->ticket_status_id, 
+            'ticketItemId' => $row->id
+        ]);
+    })
+    ->html(),
+
 
         ];
     }

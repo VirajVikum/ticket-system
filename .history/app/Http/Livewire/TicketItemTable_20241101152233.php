@@ -222,7 +222,28 @@ class TicketItemTable extends DataTableComponent
                 })
 
                 ->secondaryHeader(function () {
-                    return view('livewire.ticket-items.tables.cells.status-filter', ['field' => 'title', 'columnSearch' => $this->columnSearch]);
+                    return [
+                        SelectFilter::make('Ticket Status')
+                            ->options([
+                                '' => 'Any', // Default option
+                                1 => 'New',
+                                2 => 'Open',
+                                3 => 'Overdue',
+                                4 => 'Closed',
+                                5 => 'Canceled',
+                            ])
+                            ->filter(function (Builder $builder, $value) {
+                                if ($value) {
+                                    $builder->where('ticket_status_id', $value);
+                                }
+                            }),
+            
+                        // Add TextFilter for ID search
+                        // TextFilter::make('ID Search')
+                        //     ->filter(function (Builder $builder, $value) {
+                        //         $builder->where('id', 'like', '%' . $value . '%');
+                        //     }),
+                    ];
                 })
 
                 ->footer(function ($rows) {
